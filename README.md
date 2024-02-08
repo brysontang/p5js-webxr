@@ -2,13 +2,13 @@
 
 **Warning: Extremely Experimental Code**
 
-This project is in its earliest stages and is currently not documented. It's intended to be a way to render p5js code in WebXR by using threejs as a connector. Please be aware that everything here is subject to change without notice, including potential refactoring. This code is not yet ready for production use and should be approached with caution.
+This project is in its earliest stages and is currently not documented. It's intended to be a way to render p5js code in WebXR by using threejs as a connector. Please be aware that everything here is subject to change without notice, including potential refactoring. This code is not yet ready for production use and should be approached with caution as it may contain bugs, security vulnerabilities, and other issues.
 
 ### Getting started
 
 #### Install dependencies
 
-First, ensure you have http-server installed. If not, install it with
+First, ensure you have http-server installed. If not, install it with:
 
 ```bash
 npm install -g http-server
