@@ -1,0 +1,34 @@
+{
+  "name": "p5js-threejs-webxr",
+  "version": "1.0.0",
+  "description": "**Warning: Extremely Experimental Code**",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bryt12/p5js-threejs-webxr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bryt12/p5js-threejs-webxr/issues"
+  },
+  "homepage": "https://github.com/Bryt12/p5js-threejs-webxr#readme",
+  "dependencies": {
+    "three": "^0.161.0"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "grunt": "^1.6.1",
+    "grunt-browserify": "^6.0.0",
+    "grunt-contrib-concat": "^2.1.0",
+    "grunt-contrib-uglify": "^5.2.2",
+    "grunt-contrib-watch": "^1.1.0"
+  }
+}
