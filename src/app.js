@@ -14,9 +14,11 @@ function projectInSphere(canvas) {
   );
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
 
-  // document.getElementById('debug').innerText = JSON.stringify(texture);
+  // Hide the renderer's default canvas
+  renderer.domElement.style.display = 'none';
+
+  document.body.appendChild(renderer.domElement);
 
   let geometry = new THREE.SphereGeometry(5, 32, 32);
   let material = new THREE.MeshBasicMaterial({
@@ -50,11 +52,11 @@ if ('xr' in navigator) {
           .then(onSessionStarted);
       });
     } else {
-      alert('Immersive VR not supported');
+      console.log('Immersive VR not supported');
     }
   });
 } else {
-  alert('WebXR not supported');
+  console.log('WebXR not supported');
 }
 
 let xrSession = null;
