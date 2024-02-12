@@ -1,8 +1,8 @@
 let THREE = require('three');
 let scene, camera, renderer, texture; // Declare these variables globally
 
-function projectInSphere(p5Canvas) {
-  texture = new THREE.Texture(p5Canvas);
+function projectInSphere(canvas) {
+  texture = new THREE.Texture(canvas.elt);
   texture.needsUpdate = true;
 
   scene = new THREE.Scene();

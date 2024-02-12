@@ -1,11 +1,7 @@
-// This is a basic p5.js sketch. Replace the drawing logic with your own art.
 function setup() {
-  createCanvas(600, 400);
+  let canvas = createCanvas(600, 400);
 
-  const p5Canvas = document.getElementById('defaultCanvas0');
-
-  // Initialize your Three.js scene here or trigger it to start using this texture
-  projectInSphere(p5Canvas); // Assume this function sets up Three.js and starts the render loop
+  projectInSphere(canvas);
 }
 
 function draw() {

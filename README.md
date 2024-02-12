@@ -4,6 +4,8 @@
 
 This project is in its earliest stages and is currently not documented. It's intended to be a way to render p5js code in WebXR by using threejs as a connector. Please be aware that everything here is subject to change without notice, including potential refactoring. This code is not yet ready for production use and should be approached with caution as it may contain bugs, security vulnerabilities, and other issues.
 
+I am aware of the package [p5.xr](https://github.com/stalgiag/p5.xr), that project is not compatible with Apple devices, thus I created this project.
+
 ### Getting started
 
 #### Install dependencies
