@@ -1,6 +1,6 @@
 {
-  "name": "p5js-threejs-webxr",
-  "version": "0.0.1-alpha.1",
+  "name": "p5js-webxr",
+  "version": "0.0.1-alpha.2",
   "description": "**Warning: Extremely Experimental Code**",
   "main": "index.js",
   "directories": {
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bryt12/p5js-threejs-webxr.git"
+    "url": "git+https://github.com/Bryt12/p5js-webxr.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Bryt12/p5js-threejs-webxr/issues"
+    "url": "https://github.com/Bryt12/p5js-webxr/issues"
   },
-  "homepage": "https://github.com/Bryt12/p5js-threejs-webxr#readme",
+  "homepage": "https://github.com/Bryt12/p5js-webxr#readme",
   "dependencies": {
     "three": "^0.161.0"
   },

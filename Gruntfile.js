@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         options: {
           browserifyOptions: {
             debug: true,
-            standalone: 'p5js-threejs-webxr',
+            standalone: 'p5js-webxr',
           },
         },
         files: {

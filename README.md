@@ -1,4 +1,4 @@
-## p5js-threejs-webxr
+## p5js-webxr
 
 **Warning: Extremely Experimental Code**
 
