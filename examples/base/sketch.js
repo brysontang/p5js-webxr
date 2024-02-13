@@ -1,7 +1,7 @@
 function setup() {
   let canvas = createCanvas(600, 400);
 
-  projectInSphere(canvas);
+  projectInSphere({ canvas });
 }
 
 function draw() {

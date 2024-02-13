@@ -1,79 +1,127 @@
 let THREE = require('three');
-let scene, camera, renderer, texture; // Declare these variables globally
+let renderer; // Declare these variables globally
 
-function projectInSphere(canvas) {
-  texture = new THREE.Texture(canvas.elt);
+// Constants for the sphere geometry
+const SPHERE_RADIUS = 5;
+const SPHERE_WIDTH_SEGMENTS = 32;
+const SPHERE_HEIGHT_SEGMENTS = 32;
+
+// Constants for the camera
+const CAMERA_FOV = 75;
+const CAMERA_NEAR = 0.1;
+const CAMERA_FAR = 1000;
+const CAMERA_POSITION_Z = 10;
+
+function validateOptions(options) {
+  if (!options.canvas) {
+    throw new Error('You must provide a canvas element');
+  }
+}
+
+function createTexture(canvas) {
+  const texture = new THREE.Texture(canvas.elt);
   texture.needsUpdate = true;
+  return texture;
+}
 
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
+function createPerspectiveCamera() {
+  const aspectRatio = window.innerWidth / window.innerHeight;
+  const camera = new THREE.PerspectiveCamera(
+    CAMERA_FOV,
+    aspectRatio,
+    CAMERA_NEAR,
+    CAMERA_FAR
   );
-  renderer = new THREE.WebGLRenderer();
+  camera.position.z = CAMERA_POSITION_Z;
+  return camera;
+}
+
+function createRenderer(showThreeJsCanvas) {
+  const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  if (!showThreeJsCanvas) {
+    renderer.domElement.style.display = 'none';
+  }
+  return renderer;
+}
 
-  // Hide the renderer's default canvas
-  renderer.domElement.style.display = 'none';
-
-  document.body.appendChild(renderer.domElement);
-
-  let geometry = new THREE.SphereGeometry(5, 32, 32);
-  let material = new THREE.MeshBasicMaterial({
+function createSphere(texture) {
+  const geometry = new THREE.SphereGeometry(
+    SPHERE_RADIUS,
+    SPHERE_WIDTH_SEGMENTS,
+    SPHERE_HEIGHT_SEGMENTS
+  );
+  const material = new THREE.MeshBasicMaterial({
     map: texture,
     side: THREE.BackSide,
   });
-  let sphere = new THREE.Mesh(geometry, material);
-  scene.add(sphere);
+  return new THREE.Mesh(geometry, material);
+}
 
-  camera.position.z = 10;
+function projectInSphere(options) {
+  validateOptions(options);
+
+  const defaults = {
+    canvas: null,
+    showThreeJsCanvas: false,
+  };
+
+  const settings = Object.assign({}, defaults, options);
+
+  const texture = createTexture(settings.canvas);
+  const scene = new THREE.Scene();
+  const camera = createPerspectiveCamera();
+  const renderer = createRenderer(settings.showThreeJsCanvas);
+  document.body.appendChild(renderer.domElement);
+
+  const sphere = createSphere(texture);
+  scene.add(sphere);
 
   renderer.xr.enabled = true;
   renderer.setAnimationLoop(function () {
     texture.needsUpdate = true; // Make sure this line is within the animation loop
     renderer.render(scene, camera);
   });
-}
 
-// Check if WebXR is supported
-if ('xr' in navigator) {
-  navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
-    if (supported) {
-      const enterVRButton = document.getElementById('enterVR');
-      enterVRButton.style.display = 'block';
-      enterVRButton.addEventListener('click', () => {
-        // Request a session and start VR
-        navigator.xr
-          .requestSession('immersive-vr', {
-            optionalFeatures: ['local-floor', 'bounded-floor'],
-          })
-          .then(onSessionStarted);
-      });
-    } else {
-      console.log('Immersive VR not supported');
-    }
-  });
-} else {
-  console.log('WebXR not supported');
+  if ('xr' in navigator) {
+    navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
+      if (supported) {
+        const enterVRButton = document.getElementById('enterVR');
+        enterVRButton.style.display = 'block';
+        enterVRButton.addEventListener('click', () => {
+          // Request a session and start VR
+          navigator.xr
+            .requestSession('immersive-vr', {
+              optionalFeatures: ['local-floor', 'bounded-floor'],
+            })
+            .then(onSessionStarted(renderer));
+        });
+      } else {
+        console.log('Immersive VR not supported');
+      }
+    });
+  } else {
+    console.log('WebXR not supported');
+  }
 }
 
 let xrSession = null;
 let xrReferenceSpace = null;
 
-function onSessionStarted(session) {
-  xrSession = session;
-  renderer.xr.enabled = true;
-  renderer.xr.setSession(session);
+function onSessionStarted(renderer) {
+  return function onSessionStarted(session) {
+    xrSession = session;
+    renderer.xr.enabled = true;
+    renderer.xr.setSession(session);
 
-  session.addEventListener('end', onSessionEnded);
+    session.addEventListener('end', onSessionEnded);
 
-  session.requestReferenceSpace('local-floor').then((referenceSpace) => {
-    xrReferenceSpace = referenceSpace;
-  });
+    session.requestReferenceSpace('local-floor').then((referenceSpace) => {
+      xrReferenceSpace = referenceSpace;
+    });
 
-  document.getElementById('enterVR').remove(); // Remove the button once in VR
+    document.getElementById('enterVR').remove(); // Remove the button once in VR
+  };
 }
 
 function onSessionEnded(event) {

@@ -56,4 +56,4 @@ You can run the project with the following command:
 http-server -S -C cert.pem -K key.pem
 ```
 
-The server will display two IP addresses. Use the first if you want to access the project on the same device, and the second if you want to access it on another device on the same network, such as a WebXR capable device. To see the example visit http://127.0.0.1:8080/example/.
+The server will display two IP addresses. Use the first if you want to access the project on the same device, and the second if you want to access it on another device on the same network, such as a WebXR capable device. To see the example visit http://127.0.0.1:8080/examples/base.

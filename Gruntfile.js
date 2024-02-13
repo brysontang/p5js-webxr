@@ -35,9 +35,25 @@ module.exports = function (grunt) {
         },
       },
     },
+    compress: {
+      options: {
+        mode: 'gzip',
+      },
+      dist: {
+        files: [
+          {
+            expand: true,
+            src: ['libs/<%= pkg.name %>.min.js'],
+            dest: './',
+            ext: '.min.js.gz',
+          },
+        ],
+      },
+    },
+
     watch: {
       files: ['src/**/*.js'],
-      tasks: ['concat', 'uglify'],
+      tasks: ['browserify', 'uglify', 'compress'],
     },
   });
 
@@ -45,6 +61,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
-  grunt.registerTask('default', ['browserify', 'uglify']);
+  grunt.registerTask('default', ['browserify', 'uglify', 'compress']);
 };
