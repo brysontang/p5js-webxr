@@ -1,6 +1,6 @@
 {
   "name": "p5js-webxr",
-  "version": "1.0.0-beta",
+  "version": "1.0.1-beta",
   "description": "**Warning: Extremely Experimental Code**",
   "main": "index.js",
   "directories": {

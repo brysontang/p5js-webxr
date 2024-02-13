@@ -2,11 +2,35 @@
 
 **Warning: Extremely Experimental Code**
 
-This project is in its earliest stages and is currently not documented. It's intended to be a way to render p5js code in WebXR by using threejs as a connector. Please be aware that everything here is subject to change without notice, including potential refactoring. This code is not yet ready for production use and should be approached with caution as it may contain bugs, security vulnerabilities, and other issues.
+The intention of this code is to provide a simple way to create WebXR experiences using p5.js. I am aware of the package [p5.xr](https://github.com/stalgiag/p5.xr), that project is not compatible with Apple devices, thus I created this project.
 
-I am aware of the package [p5.xr](https://github.com/stalgiag/p5.xr), that project is not compatible with Apple devices, thus I created this project.
+### Adding to your project
 
-### Getting started
+To add this project to your p5js project, add the following line to your HTML file:
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/Bryt12/p5js-webxr/libs/p5js-webxr.min.js"></script>
+```
+
+Then, you can use the `projectInSphere` function to create a WebXR scene on the inside of a sphere:
+
+```javascript
+function setup() {
+  let canvas = createCanvas(400, 400);
+
+  projectInSphere(canvas);
+}
+```
+
+This will add a "Open VR" button to the top right of the canvas. When clicked, it will open the WebXR experience in a sphere.
+
+### Setting up an Apple Vision Pro
+
+To set up an Apple Vision Pro to work with this project, first you must enable WebXR in Safari.
+
+Settings > Apps > Safari > Advanced (bottom) > Feature Flags (bottom) > Enable WebXR Augmented Reality and WebXR Hand Input Module
+
+### Running locally
 
 #### Install dependencies
 

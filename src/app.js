@@ -59,7 +59,7 @@ function createSphere(texture) {
 }
 
 function addButton(canvas, callback) {
-  let btn = createButton('Enter VR');
+  let btn = createButton('Open VR');
   let canvasPosition = canvas.position();
 
   btn.position(canvasPosition.x + 10, canvasPosition.y + 10);
