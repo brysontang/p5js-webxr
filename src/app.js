@@ -58,6 +58,18 @@ function createSphere(texture) {
   return new THREE.Mesh(geometry, material);
 }
 
+function addButton(canvas, callback) {
+  let btn = createButton('Enter VR');
+  let canvasPosition = canvas.position();
+
+  btn.position(canvasPosition.x + 10, canvasPosition.y + 10);
+
+  btn.style('font-size', '16px');
+  btn.mousePressed(() => {
+    callback();
+  });
+}
+
 function projectInSphere(options) {
   validateOptions(options);
 
@@ -86,9 +98,7 @@ function projectInSphere(options) {
   if ('xr' in navigator) {
     navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
       if (supported) {
-        const enterVRButton = document.getElementById('enterVR');
-        enterVRButton.style.display = 'block';
-        enterVRButton.addEventListener('click', () => {
+        addButton(settings.canvas, () => {
           // Request a session and start VR
           navigator.xr
             .requestSession('immersive-vr', {
@@ -120,7 +130,7 @@ function onSessionStarted(renderer) {
       xrReferenceSpace = referenceSpace;
     });
 
-    document.getElementById('enterVR').remove(); // Remove the button once in VR
+    // document.getElementById('enterVR').remove(); // Remove the button once in VR
   };
 }
 
